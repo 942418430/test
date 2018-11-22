@@ -1,0 +1,29 @@
+
+#include<math.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+
+int main()
+
+{
+	int n = 0;
+	int i = 0;
+
+	scanf("%d",&n);
+
+	for(i=2; i<=sqrt((double)n); i++)//优化，因为sqrt参数不是整形的所以进行强制类型转换
+	{
+		if((int)n % (int)i == 0)
+		{
+			printf("%d不是素数\n", n);
+			break;
+		}
+	}
+
+	if(i >sqrt((double )n))
+		printf("%d是素数\n",n);
+
+	system("pause");
+	return 0;
+}
