@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<assert.h>
+
+char* my_strcpy(char* p ,char* const arr)
+{
+	
+	char* b = p; //保留拷贝数组的首元素地址。
+	char* d = arr;
+	assert(arr != NULL);
+
+	while(*p++ = *d++)//指针向后移动复制每一个元素，当复制'\0'后停止。
+	{
+		;
+	}
+	return b;
+}
+
+int main()
+{
+	char arr[] ="hello word"; 
+	
+	char c[20] ="";
+	 
+	printf("%s\n",my_strcpy(c , arr));
+
+	system("pause");
+	return 0;
+}
