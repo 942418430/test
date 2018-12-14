@@ -47,3 +47,5 @@ void Cha(con*);
 void Gai(con*);
 void Shan(con*);
 void Paixu(con*);
+void baocun(con*);
+void jiazai(con*);

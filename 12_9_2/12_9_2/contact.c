@@ -6,25 +6,29 @@
 //	memset(p->com, '0', max_count * sizeof(pp));
 //}
 
+int zeng(con* p)
+{
+	pp* a = NULL;
+	//如果空间不⾜，调整空间⼤⼩
+	if (p->count == p->capacity)
+	{
+		a = (pp*)realloc(p->com, (p->capacity += 2)*sizeof(pp));
+		if (a == NULL)
+		{
+			printf("%s\n", strerror(errno));
+			return 1;
+		}
+		else
+		{
+			p->com = a;
+			return 0;
+		}
+	}
+}
 void Add(con* p)
 {
-		pp* a = NULL;
-		//如果空间不⾜，调整空间⼤⼩
-		if (p->count == p->capacity)
-		{
-			a = (pp*)realloc(p->com, (p->capacity += 2)*sizeof(pp));
-			if (a == NULL)
-			{
-				printf("%s\n", strerror(errno));
-				return;
-			}
-			else
-			{
-				p->com = a;
-				printf("扩容成功\n");
-			}
-		}
-	
+	if (zeng(p))
+	{
 		printf("请输入姓名：");
 		scanf("%s", &(p->com[p->count].name));
 		printf("请输入年龄：");
@@ -35,8 +39,11 @@ void Add(con* p)
 		scanf("%s", &(p->com[p->count].tln));
 		printf("请输入住址：");
 		scanf("%s", &(p->com[p->count].adds));
-	
+
 		p->count++;
+	}
+	
+
 }
 
 void Dayin(con* p)
@@ -154,4 +161,46 @@ void Paixu(con* p)
 	}
 	printf("排序成功！\n");
 	Dayin(p);
+}
+
+void baocun(con* p)
+{
+	int i = 0;
+	//打开文件
+	FILE* pf = fopen("contact.dat", "wb");
+	if (pf == NULL)
+	{
+		perror("open");
+		system("pause");
+		return;		
+	}
+	//保存文件
+	for (i = 0; i < p->count; i++)
+	{
+		fwrite(p->com+i, sizeof(pp), 1, pf);
+	}
+	fclose(pf);
+	pf = NULL;
+	printf("保存成功\n");
+}
+void jiazai(con* p)
+{
+	pp* a = NULL;
+	int i = 0;
+	pp tmp = { 0 };
+	FILE* pf = fopen("contact.dat", "rb");
+	if (pf == NULL)
+	{
+		perror("open");
+		system("pause");
+		return;
+	}
+	while (fread(&tmp, sizeof(pp), 1, pf))
+	{
+		zeng(p);
+		p->com[p->count] = tmp;
+		(p->count)++;
+	}
+	fclose(pf);
+	pf = NULL;
 }

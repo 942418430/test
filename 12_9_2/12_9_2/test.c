@@ -20,6 +20,7 @@ void test()
 	//¿ª±Ù¿Õ¼ä
 	cn.com = (pp*)calloc(max_count, sizeof(pp));
 	cn.count = 0;//
+	jiazai(&cn);
 	cn.capacity = max_count;
 	do
 	{
@@ -29,8 +30,9 @@ void test()
 		switch (input)
 		{
 		case ext:
+			baocun(&cn);
 			free(cn.com);
-			cn.com == NULL;
+			cn.com = NULL;
 			printf("ÍË³ö£¡\n");
 			break;
 		case add:
